@@ -15,6 +15,22 @@ struct EventCellViewModel {
     let displayName: String
     let avatarUrl: String
     let url: String
+    
+    init(eventType: String, eventDate: String, displayName: String, avatarUrl: String, url: String) {
+        self.eventType = eventType
+        self.eventDate = eventDate
+        self.displayName = displayName
+        self.avatarUrl = avatarUrl
+        self.url = url
+    }
+    
+    init(event: Event) {
+        self.eventType = event.type
+        self.eventDate = event.eventDate?.description ?? ""
+        self.displayName = event.actor.displayName
+        self.avatarUrl = event.actor.avatarUrl?.absoluteString ?? ""
+        self.url = event.actor.url?.absoluteString ?? ""
+    }
 }
 
 class EventCellNode: ASCellNode {
@@ -49,7 +65,6 @@ class EventCellNode: ASCellNode {
         // icon
         iconNode.url = URL(string: viewModel.avatarUrl)
         iconNode.isLayerBacked = true
-        
     }
     
     override func didLoad() {

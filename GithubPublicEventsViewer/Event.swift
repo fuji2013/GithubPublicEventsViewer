@@ -15,7 +15,7 @@ struct Event: Codable {
     var eventDate: Date? {
         guard let dateString = created_at else { return nil }
         let format = DateFormatter()
-        format.dateFormat = ""
+        format.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
         
         return format.date(from: dateString)
     }
@@ -28,8 +28,9 @@ struct Event: Codable {
         var displayName: String { return display_login }
         var gravatarId: String { return gravatar_id }
         let url: URL?
-        let avatarUrl: URL?
+        var avatarUrl: URL? { return URL(string: avatar_url) }
         
+        private let avatar_url: String
         private let display_login: String
         private let gravatar_id: String
     }

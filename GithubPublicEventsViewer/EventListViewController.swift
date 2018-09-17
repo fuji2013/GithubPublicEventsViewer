@@ -13,7 +13,9 @@ import AsyncDisplayKit
 
 // ASViewController<ASTableNode>を継承
 class EventListViewController: ASViewController<ASTableNode> {
+    private let eventListController: EventListController = EventListController()
     fileprivate var datas = [EventCellViewModel]()
+    var page: UInt = 0
     
     fileprivate var tableNode: ASTableNode {
         return node
@@ -34,14 +36,6 @@ class EventListViewController: ASViewController<ASTableNode> {
 
         tableNode.view.tableFooterView = UIView()
         tableNode.view.backgroundColor = UIColor.cyan
-//        tableNode.view.
-        
-        let controller = EventListController()
-        controller.fetch { (events) in
-            print(events)
-            print(events.count)
-            print("あ")
-        }
     }
 }
 
@@ -51,20 +45,25 @@ extension EventListViewController: ASTableDataSource {
     }
     
     func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-        return datas.count
+        return eventListController.numberOfFetchdEvents
     }
     
     func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
-        let cellBlock: ASCellNodeBlock = {
+        let cellBlock: ASCellNodeBlock = { [weak self] in
             // TODO: ASCellNodeを継承したNodeを返す
-            let vm = EventCellViewModel(
+            let emptyVm = EventCellViewModel(
                 eventType: "Push Event",
                 eventDate: "2018/09/15",
                 displayName: "Tom",
                 avatarUrl: "https://scontent-nrt1-1.cdninstagram.com/vp/9576c2f8ff9c458ae7b3d824828f30d4/5C353734/t51.2885-19/s320x320/35166396_1854571321504130_3944272096611270656_n.jpg", //"https://avatars.githubusercontent.com/u/4578511?",
                 url: "https://api.github.com/users/fuji2013"
             )
-            return EventCellNode(viewModel: vm)
+            
+            guard let event = self?.eventListController.fetch(index: indexPath.row) else {
+                return EventCellNode(viewModel: emptyVm)
+            }
+            
+            return EventCellNode(viewModel: EventCellViewModel(event: event))
         }
         
         return cellBlock()
@@ -77,19 +76,7 @@ extension EventListViewController: ASTableDelegate {
     
     func tableNode(_ tableNode: ASTableNode, willBeginBatchFetchWith context: ASBatchContext) {
         context.beginBatchFetching()
-//        [context beginBatchFetching];
-//        // Notificationをフェッチするコードをここに書きます。
-//        fetchNotifications(completion: { () -> Void in
-//            let insertedIndexPathes: [NSIndexPath]() = ...
-//            // IndexPathの配列を渡して、Insertをします。
-//            tableNode.insertRowsAtIndexPaths(insertedIndexPathes, withRowAnimation: .Fade)
-//            // 最後にフェッチが完了したことを伝えます。trueは成功したことを意味します。
-//            context.completeBatchFetching(true)
-//        }
-        
-//        [context completeBatchFetching:YES];
-        insertRow()
-        context.completeBatchFetching(true)
+        loadPage(with: context)
     }
     
     private func insertRow() {
@@ -116,18 +103,32 @@ extension EventListViewController: ASTableDelegate {
         }
         
         
-//        NSInteger section = 0;
-//        NSMutableArray *indexPaths = [NSMutableArray array];
-//
-//        NSInteger newTotalNumberOfPhotos = [_photoFeed numberOfItemsInFeed];
-//        NSInteger existingNumberOfPhotos = newTotalNumberOfPhotos - newPhotos.count;
-//        for (NSInteger row = existingNumberOfPhotos; row < newTotalNumberOfPhotos; row++) {
-//            NSIndexPath *path = [NSIndexPath indexPathForRow:row inSection:section];
-//            [indexPaths addObject:path];
-//        }
-//        [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+    }
     
+    private func insertRow(_ viewModels: [EventCellViewModel], context: ASBatchContext? = nil) {
+        let section = 0
+        var indexPaths = [IndexPath]()
         
+        let newTotalNumberOfEvents = eventListController.numberOfFetchdEvents
+        let existingTotalNumberOfEvents = newTotalNumberOfEvents - viewModels.count
+        
+        for i in existingTotalNumberOfEvents..<newTotalNumberOfEvents {
+            let indexPath = IndexPath(row: i, section: section)
+            indexPaths.append(indexPath)
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.tableNode.insertRows(at: indexPaths, with: .none)
+            context?.completeBatchFetching(true)
+        }
+    }
+    
+    private func loadPage(with context: ASBatchContext) {
+        page += 1
+        eventListController.fetch(page: page) { [weak self] (events) in
+            let viewModels = events.map(EventCellViewModel.init(event: ))
+            self?.insertRow(viewModels, context: context)
+        }
     }
 }
 
