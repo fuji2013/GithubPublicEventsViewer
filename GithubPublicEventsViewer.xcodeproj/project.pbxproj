@@ -12,9 +12,15 @@
 		A73669AE214CD0EF00032C3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A73669AC214CD0EF00032C3E /* Main.storyboard */; };
 		A73669B0214CD0F200032C3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A73669AF214CD0F200032C3E /* Assets.xcassets */; };
 		A73669B3214CD0F200032C3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A73669B1214CD0F200032C3E /* LaunchScreen.storyboard */; };
+		A73669BB214CDE2900032C3E /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73669BA214CDE2900032C3E /* EventListViewController.swift */; };
+		A73669BD214CE1AA00032C3E /* EventCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73669BC214CE1AA00032C3E /* EventCellNode.swift */; };
+		A7478AF4214DF4EB006EBEE5 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7478AF3214DF4EB006EBEE5 /* Event.swift */; };
+		A7478AF6214DF787006EBEE5 /* EventListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7478AF5214DF787006EBEE5 /* EventListController.swift */; };
+		A792B9D6214F4CD700A067C5 /* AsyncDisplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A792B9D5214F4CD700A067C5 /* AsyncDisplayKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		59C6BAF223FFDF11E9217742 /* Pods_GithubPublicEventsViewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GithubPublicEventsViewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A73669A5214CD0EF00032C3E /* GithubPublicEventsViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubPublicEventsViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A73669A8214CD0EF00032C3E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A73669AA214CD0EF00032C3E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +28,11 @@
 		A73669AF214CD0F200032C3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A73669B2214CD0F200032C3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A73669B4214CD0F200032C3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A73669BA214CDE2900032C3E /* EventListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
+		A73669BC214CE1AA00032C3E /* EventCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellNode.swift; sourceTree = "<group>"; };
+		A7478AF3214DF4EB006EBEE5 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		A7478AF5214DF787006EBEE5 /* EventListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListController.swift; sourceTree = "<group>"; };
+		A792B9D5214F4CD700A067C5 /* AsyncDisplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AsyncDisplayKit.framework; path = Carthage/Build/iOS/AsyncDisplayKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A792B9D6214F4CD700A067C5 /* AsyncDisplayKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +52,7 @@
 			children = (
 				A73669A7214CD0EF00032C3E /* GithubPublicEventsViewer */,
 				A73669A6214CD0EF00032C3E /* Products */,
+				C8867A254B9CFB9D399F9277 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,8 +73,21 @@
 				A73669AF214CD0F200032C3E /* Assets.xcassets */,
 				A73669B1214CD0F200032C3E /* LaunchScreen.storyboard */,
 				A73669B4214CD0F200032C3E /* Info.plist */,
+				A73669BA214CDE2900032C3E /* EventListViewController.swift */,
+				A73669BC214CE1AA00032C3E /* EventCellNode.swift */,
+				A7478AF3214DF4EB006EBEE5 /* Event.swift */,
+				A7478AF5214DF787006EBEE5 /* EventListController.swift */,
 			);
 			path = GithubPublicEventsViewer;
+			sourceTree = "<group>";
+		};
+		C8867A254B9CFB9D399F9277 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A792B9D5214F4CD700A067C5 /* AsyncDisplayKit.framework */,
+				59C6BAF223FFDF11E9217742 /* Pods_GithubPublicEventsViewer.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,6 +100,7 @@
 				A73669A1214CD0EF00032C3E /* Sources */,
 				A73669A2214CD0EF00032C3E /* Frameworks */,
 				A73669A3214CD0EF00032C3E /* Resources */,
+				A792B9D7214F4CE100A067C5 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -130,13 +157,35 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A792B9D7214F4CE100A067C5 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/AsyncDisplayKit.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A73669A1214CD0EF00032C3E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A73669AB214CD0EF00032C3E /* ViewController.swift in Sources */,
+				A73669BB214CDE2900032C3E /* EventListViewController.swift in Sources */,
+				A73669BD214CE1AA00032C3E /* EventCellNode.swift in Sources */,
 				A73669A9214CD0EF00032C3E /* AppDelegate.swift in Sources */,
+				A7478AF6214DF787006EBEE5 /* EventListController.swift in Sources */,
+				A7478AF4214DF4EB006EBEE5 /* Event.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +330,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A43MQC6SDB;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = GithubPublicEventsViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -298,6 +352,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A43MQC6SDB;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = GithubPublicEventsViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
